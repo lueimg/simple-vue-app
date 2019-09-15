@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdn.auth0.com/js/auth0/9.11.3/auth0.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <style>
@@ -51,24 +51,13 @@
             margin-top: 1rem;
         }
 
-        .mk-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .mk-title {
             margin-bottom: .75rem;
-        }
-
-        .mk-content-background {
-            background: #fff;
         }
 
         .mk-table * {
             text-align: center !important;
         }
-
 
         .steps:not(.is-vertical).has-content-centered .steps-content {
             margin-top: 2rem;
@@ -182,7 +171,6 @@
                 </div>
             </div>
         </section>
-
     </script>
 
     <script type="text/x-template" id="step-1">
@@ -240,50 +228,50 @@
                                     </div>
                                     <div class="field">
                                         <div class="control">
-                                            <input type="text" class="input" placeholder="Country">
+                                            <input v-model="country" type="text" class="input" placeholder="Country">
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="control">
-                                            <input type="text" class="input" placeholder="State/Province">
+                                            <input v-model="state" type="text" class="input" placeholder="State/Province">
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="control">
-                                            <input type="text" class="input" placeholder="Zip Code">
+                                            <input v-model="zip" type="text" class="input" placeholder="Zip Code">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="column is-5">
+                        <div class="column is-6">
                             <div class="columns">
                                 <div class="column is-10 is-offset-1">
                                     <div class="mk-title has-text-weight-bold has-text-left">Number of Employees</div>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="answer"> 5,000 + Employees
+                                            <input v-model="employees" value=" 5,000 +" type="radio" name="employees"> 5,000 + Employees
                                         </label>
                                     </div>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="answer"> 2,000 - 4,999 Employees
+                                            <input v-model="employees" value=" 2,000 - 4,999" type="radio" name="employees"> 2,000 - 4,999 Employees
                                         </label>
                                     </div>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="answer"> 500 - 1,999 Employees
+                                            <input v-model="employees" value="500 - 1,999" type="radio" name="employees"> 500 - 1,999 Employees
                                         </label>
                                     </div>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="answer"> 100 - 499 Employees
+                                            <input v-model="employees" value="100 - 499" type="radio" name="employees"> 100 - 499 Employees
                                         </label>
                                     </div>
                                     <div class="control">
                                         <label class="radio">
-                                            <input type="radio" name="answer"> 0 - 99 Employees
+                                            <input v-model="employees" value="0 - 99" type="radio" name="employees"> 0 - 99 Employees
                                         </label>
                                     </div>
                                     <br>
@@ -293,20 +281,27 @@
                                         Please upload your logo in SVG full-color format.
                                     </div>
                                     <br>
-                                    <div class="file has-name is-boxed">
+                                    <div id="file-js-example" class="file">
                                         <label class="file-label">
-                                            <input class="file-input" type="file" name="resume">
-                                            <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
-                                            </span>
-                                            <span class="file-label">
-                                                Choose a file…
-                                            </span>
-                                            </span>
-                                            <span class="file-name">
-                                            (filename)
-                                            </span>
+                                            <div class="columns">
+                                                <div class="column">
+                                                    <div class="field">
+                                                        <img id="thumbnail" src="" alt="preview" />
+                                                    </div>
+                                                </div>
+                                                <div class="column">
+                                                    <input @change="updateFile" class="file-input" type="file" name="resume">
+                                                    <span class="file-cta">
+                                                        <span class="file-icon">
+                                                            <i class="fas fa-upload"></i>
+                                                        </span>
+                                                        <span class="file-label">
+                                                            Choose a file…
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
                                         </label>
                                     </div>
                                 </div>
@@ -405,11 +400,11 @@
                     <div class="field">
                         <div class="control">
                             <div class="select is-fullwidth">
-                                <select v-model="selectedTier" >
+                                <select v-model="selectedTier" @change="updateTier" >
                                     <option value="" >Select Membership Tier</option>
-                                    <option value="10,000 USD">Tier 1</option>
-                                    <option value="30,000 USD">Tier 2</option>
-                                    <option value="50,000 USD">Tier 3</option>
+                                    <option value="Tier 1|10,000 USD">Tier 1</option>
+                                    <option value="Tier 2|30,000 USD">Tier 2</option>
+                                    <option value="Tier 3|50,000 USD">Tier 3</option>
                                 </select>
                             </div>
                         </div>
@@ -421,7 +416,7 @@
                     <div class="column">
                         <div class="has-text-weight-bold">
                             Total Annual Membership Fee:
-                            <span class="has-text-info">{{ selectedTier }}</span>
+                            <span class="has-text-info">{{tierValue}}</span>
                         </div>
                     </div>
                 </div>
@@ -429,7 +424,7 @@
                     <div class="column is-4 is-offset-4">
                         <div class="field">
                             <div class="control">
-                                <input type="text" class="input" placeholder="Purcharse Order ID (If Required)">
+                                <input v-model="orderId" type="text" class="input" placeholder="Purcharse Order ID (If Required)">
                             </div>
                         </div>
                     </div>
@@ -440,7 +435,8 @@
             <div class="mk-separator"></div>
             <div class="mk-row columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Primary + Billing Contacts</a>
+                    <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Primary + Billing Contacts</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -875,47 +871,20 @@
             </div>
             <div class="columns is-multiline">
                 <mk-box title="Organization Details" v-on:editStep="goToPage('/step-1')">
-                    <div class="logo">
-                        <img src="https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C22dbfa8e4c58450380333c50d0bcf81c/projects/M561396ba36f63d8ff26b0f7500f2bd381567781594691/images/M66fc125adfa2133ed88f79daa9b186101567785919871" alt="">
-                    </div>
                     <p>{{ store.step1 ? store.step1.organizationName: '' }}</p>
-                    <p>140 Caspian Court</p>
-                    <p>Sunnyvale, CA</p>
-                    <p>94089</p>
-                    <p>USA</p>
+                    <p>{{ store.step1 ? store.step1.address: '' }}</p>
+                    <p>{{ store.step1 ? store.step1.city: '' }}</p>
+                    <p>{{ store.step1 ? store.step1.state: '' }}</p>
+                    <p>{{ store.step1 ? store.step1.zip: '' }}</p>
                 </mk-box>
 
-                <div class="column is-4">
-                    <div class="box">
-                            <p class="title is-5">Organization details</p>
-                    </div>
-                </div>
-                <div class="column is-4">
-                    <div class="box">
-                            <p class="title is-5">Organization details</p>
-                    </div>
-                </div>
-                <div class="column is-4">
-                    <div class="box">
-                            <p class="title is-5">Organization details</p>
-                    </div>
-                </div>
-                <div class="column is-4">
-                    <div class="box">
-                            <p class="title is-5">Organization details</p>
-                    </div>
-                </div>
-                <div class="column is-4">
-                    <div class="box">
-                            <p class="title is-5">Organization details</p>
-                    </div>
-                </div>
+                <mk-box title="Membership Details" v-on:editStep="goToPage('/step-2')">
+                    <p><b>Foundation:</b> Foundation Name</p>
+                    <p><b>Membership Tier:</b> {{ store.step2 ? store.step2.tierName: '' }}</p>
+                    <p><b>Employees:</b> {{ store.step1 ? store.step1.employees: '' }}</p>
+                    <p><b>Annual Fee:</b> {{ store.step2 ? store.step2.tierValue: '' }}</p>
+                </mk-box>
 
-                <div class="column is-12">
-                    <div class="box">
-                            <p class="title is-5">Additional Instructions</p>
-                    </div>
-                </div>
             </div>
             <div class="mk-separator"></div>
             <div class="columns">
@@ -962,6 +931,9 @@
     <style>
         .mk-box {
             position: relative;
+        }
+        .mk-box .box {
+            min-height: 15rem;
         }
         .box-icon-edit {
             cursor: pointer;
@@ -1022,7 +994,12 @@
     <script>
 
         var store = {
-            step1: null
+            step1: null,
+            step2: null,
+            step3: null,
+            step4: null,
+            step5: null,
+            step6: null,
         }
 
         var Login = {
@@ -1043,12 +1020,33 @@
             },
             data: function () {
                 return {
-                    organizationName: '',
-                    address: '',
-                    city: '',
+                    organizationName: 'lg guerra',
+                    address: 'lg address',
+                    city: 'lg city',
+                    country: 'lg country',
+                    state: 'lg state',
+                    zip: 'lg zip',
+                    employees: '',
                 }
             },
             methods: {
+                updateFile: function (event) {
+                    var img = document.getElementById("thumbnail");
+                    var reader = new FileReader();
+
+                    if (!event || !event.target.files || !event.target.files.length) {
+                        return;
+                    }
+
+                    img.file = event.target.files[0];
+
+                    reader.onload = (function(aImg) {
+                        return function(e) {
+                            aImg.src = e.target.result;
+                        }
+                    })(img);
+                    reader.readAsDataURL(img.file)
+                },
                 goToReview: function () {
                     this.$emit('stepchange', '/step-7')
                 },
@@ -1060,13 +1058,25 @@
         };
         var Step2 = {
             template: '#step-2',
+            props: {
+                review: Boolean
+            },
             data: function () {
                 return {
-                    selectedTier: ''
+                    selectedTier: '',
+                    tierName: '',
+                    tierValue: '',
+                    orderId: ''
                 }
             },
             methods: {
+                updateTier: function() {
+                    var tier = this.selectedTier.split('|');
+                    this.tierName = tier[0];
+                    this.tierValue = tier[1];
+                },
                 goToNext: function () {
+                    store.step2 = this._data;
                     this.$emit('stepchange', '/step-3')
                 }
             }
