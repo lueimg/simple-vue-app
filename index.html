@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Linux Foundation</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.11.3/auth0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <style>
+        /* debug rule */
+        deb*:not(path):not(g) {
+            color: hsla(210, 100%, 100%, 0.9) !important;
+            background: hsla(210, 100%, 50%, 0.5) !important;
+            outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+            box-shadow: none !important;
+        }
+
+        .box {
+            margin-top: 5rem;
+        }
+
+        .avatar {
+            margin-top: -70px;
+            padding-bottom: 20px;
+        }
+
+        .avatar img {
+            padding: 5px;
+            background: #fff;
+            border-radius: 50%;
+            -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+            box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+        }
+
+        .mk-paddingless-vertical {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        .mk-separator {
+            margin-top: 1rem;
+        }
+
+        .mk-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mk-title {
+            margin-bottom: .75rem;
+        }
+
+        .mk-content-background {
+            background: #fff;
+        }
+
+        .mk-table * {
+            text-align: center !important;
+        }
+
+
+        .steps:not(.is-vertical).has-content-centered .steps-content {
+            margin-top: 2rem;
+            margin-left: .5em;
+            margin-right: .5em;
+            padding-top: .2em;
+        }
+
+
+        .steps:not(.is-vertical).has-content-centered .steps-marker {
+            position: absolute;
+            left: calc(50% - 1rem);
+        }
+
+        .steps .steps-marker {
+            height: 2rem;
+            width: 2rem;
+        }
+
+        .steps .steps-marker {
+            align-items: center;
+            display: flex;
+            border-radius: 50%;
+            font-weight: 700;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .steps:not(.is-vertical) .steps-segment:not(:last-child) {
+            flex-basis: 1rem;
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+
+        .steps .steps-segment {
+            position: relative;
+        }
+
+
+        .steps:not(.is-vertical).has-content-centered .steps-segment:not(:last-child):after {
+            left: 50%;
+            right: -50%;
+        }
+
+        .steps:not(.is-vertical) .steps-segment:not(:last-child):after {
+            height: .2em;
+            left: 1.76rem;
+            right: -.24rem;
+            bottom: -1rem;
+        }
+
+        .steps .steps-segment:not(:last-child):after {
+            content: " ";
+            display: block;
+            position: absolute;
+        }
+
+        .steps-segment:after {
+            background-color: #00d1b2;
+        }
+
+        .steps:not(.is-vertical).has-content-centered {
+            text-align: center;
+        }
+
+        .steps:not(.is-vertical) {
+            display: flex;
+        }
+
+        .steps {
+            font-size: 1rem;
+        }
+
+        .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
+            background-color: #00d1b2;
+            color: #fff;
+        }
+
+        .steps:not(.is-hollow) .steps-segment.is-active~.steps-segment .steps-marker:not(.is-hollow) {
+            background-color: #dbdbdb;
+            color: #000000b3;
+        }
+
+        .steps-segment.is-active~.steps-segment:after {
+            background-color: #dbdbdb;
+        }
+
+        .steps-segment.is-active:after {
+            background-color: #dbdbdb;
+        }
+    </style>
+
+    <script type="text/x-template" id="login">
+        <section class="hero is-light is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-4 is-offset-4">
+                        <h3 class="title has-text-grey">Login</h3>
+                        <p class="subtitle has-text-grey">Please login to proceed.</p>
+                        <div class="box">
+                            <figure class="avatar">
+                                <img src="https://gallery.mailchimp.com/3928cce279308bf13be2fa84d/images/35452a77-9fd5-4594-b6b3-740a8351baa8.jpg">
+                            </figure>
+                            <button class="button is-block is-info is-large is-fullwidth" v-on:click="login">Sign In</button>
+                        </div>
+                        <p class="has-text-grey">
+                            <a href="../">Need Help?</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </script>
+
+    <script type="text/x-template" id="step-1">
+        <section class="section">
+            <div class="columns has-text-centered">
+                <div class="column is-8 is-offset-2 has-background-white">
+                    <div class="columns">
+                        <div class="column">
+                            <h1 class="title is-size-4"> Already a Linux Foundation Member? </h1>
+                            <p>If your organization is already a Linux Foundation member, search for it in <br> the field below and we will auto-populate the details that we have on file.</p>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-4 is-offset-4">
+                            <div class="select">
+                                <select>
+                                    <option>Select your organization</option>
+                                    <option>Organization 1</option>
+                                    <option>Organization 2</option>
+                                    <option>Organization 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <h1 class="title is-4">Organization Details</h1>
+                            <p>If your organization is not already a Linux Foundation member, please <br> enter the details in the fields below.</p>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-5 is-offset-1">
+                            <div class="columns">
+                                <div class="column is-10 is-offset-1">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input v-model="organizationName"
+                                                    type="text"
+                                                    class="input"
+                                                    placeholder="Organization Name">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input  v-model="address"
+                                                    type="text"
+                                                    class="input"
+                                                    placeholder="Street Address">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input v-model="city" type="text" class="input" placeholder="City">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="text" class="input" placeholder="Country">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="text" class="input" placeholder="State/Province">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="text" class="input" placeholder="Zip Code">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column is-5">
+                            <div class="columns">
+                                <div class="column is-10 is-offset-1">
+                                    <div class="mk-title has-text-weight-bold has-text-left">Number of Employees</div>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="answer"> 5,000 + Employees
+                                        </label>
+                                    </div>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="answer"> 2,000 - 4,999 Employees
+                                        </label>
+                                    </div>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="answer"> 500 - 1,999 Employees
+                                        </label>
+                                    </div>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="answer"> 100 - 499 Employees
+                                        </label>
+                                    </div>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="answer"> 0 - 99 Employees
+                                        </label>
+                                    </div>
+                                    <br>
+
+                                    <div class="has-text-weight-bold has-text-left">Upload Logo</div>
+                                    <div class="is-size-7 has-text-left">
+                                        Please upload your logo in SVG full-color format.
+                                    </div>
+                                    <br>
+                                    <div class="file has-name is-boxed">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" name="resume">
+                                            <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file…
+                                            </span>
+                                            </span>
+                                            <span class="file-name">
+                                            (filename)
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mk-separator"></div>
+
+                    <div class="mk-row columns">
+                        <div class="column has-text-centered ">
+                            <a v-on:click="goToNext" class="button is-info is-rounded">Next: Membership Tier</a>
+                        </div>
+                    </div>
+                    <div class="mk-separator"></div>
+                </div>
+            </div>
+        </section>
+    </script>
+
+    <script type="text/x-template" id="step-2">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4"> Select Membership Tier </h1>
+                    <p>
+                        The membership tier pricing has been auto-populated based on the size of
+                        <br>
+                        your organization and your Linux Foundation membership status.
+                    </p>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-10 is-offset-1">
+                    <table class="mk-table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>[ProjectName]</th>
+                                <th>Tier 1</th>
+                                <th>Tier 2</th>
+                                <th>Tier 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <td class="has-text-weight-bold">FREE</td>
+                                <td class="has-text-weight-bold">Variable</td>
+                                <td class="has-text-weight-bold">$100k</td>
+                            </tr>
+                            <tr>
+                                <th>Benefit #1</th>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Benefit #1</th>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="icon">
+                                        <i class="far fa-check-square"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <br>
+            <div class="columns">
+                <div class="column is-4 is-offset-4">
+                    <div class="field">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select v-model="selectedTier" >
+                                    <option value="" >Select Membership Tier</option>
+                                    <option value="10,000 USD">Tier 1</option>
+                                    <option value="30,000 USD">Tier 2</option>
+                                    <option value="50,000 USD">Tier 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <template v-if="selectedTier">
+                <div class="columns">
+                    <div class="column">
+                        <div class="has-text-weight-bold">
+                            Total Annual Membership Fee:
+                            <span class="has-text-info">{{ selectedTier }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-4 is-offset-4">
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" class="input" placeholder="Purcharse Order ID (If Required)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div class="mk-separator"></div>
+            <br>
+            <div class="mk-separator"></div>
+            <div class="mk-row columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Primary + Billing Contacts</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <script type="text/x-template" id="step-3">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Membership Roles</h1>
+                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated. <br> If you wish to have a different primary contact for this membership application please update it below.</p>
+                </div>
+            </div>
+            <div class="columns">
+
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Primary Contact</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Update Linux Foundation primary contact information.
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Primary Contact</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Update Linux Foundation primary contact information.
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Technical Contacts</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <script type="text/x-template" id="step-4">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Technical contacts</h1>
+                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated. <br> If you wish to have a different primary contact for this membership application please update it below.</p>
+                </div>
+            </div>
+            <div class="columns is-multiline">
+                <div class="column is-6" v-for="(item, index) in contacts">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Technical Contact #{{ index + 1 }}</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="addContact" class="button is-success is-rounded">Add Technical Contact</a>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Makerting + PR Contacts</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <script type="text/x-template" id="step-5">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Marketing & PR Contacts</h1>
+                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated. <br> If you wish to have a different primary contact for this membership application please update it below.</p>
+                </div>
+            </div>
+            <div class="columns">
+
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Marketing Contact</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Update Linux Foundation primary contact information.
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">PR Contact</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Update Linux Foundation primary contact information.
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Legal Contact + Instructions</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <script type="text/x-template" id="step-6">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Legal Contact + Instructions</h1>
+                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated. <br> If you wish to have a different primary contact for this membership application please update it below.</p>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Legal Contact</h1>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Job Title">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="LinkedIn">
+                                </div>
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Update Linux Foundation primary contact information.
+                            </div>
+                            <div class="is-size-7 has-text-left">
+                                    Subscribe to all relevant mailing lists and meetings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-10 is-offset-1">
+                            <h1 class="title is-size-6">Have Questions? </h1>
+                            <p>
+                                    Please provide any additional details or instructions needed with respect to your membership application.
+                            </p>
+                            <br>
+                            <textarea class="textarea" placeholder="Additional Instructions" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Final Review + Submit</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <script type="text/x-template" id="step-7">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Review Your Application</h1>
+                    <p>Please review your application details below, and make any changes before submitting.</p>
+                </div>
+            </div>
+            <div class="columns is-multiline">
+                <div class="column is-4">
+                    <div class="box has-text-left">
+                        <h1 class="title is-7">Organization details</h1>
+                        <div class="logo">
+                            <img src="https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C22dbfa8e4c58450380333c50d0bcf81c/projects/M561396ba36f63d8ff26b0f7500f2bd381567781594691/images/M66fc125adfa2133ed88f79daa9b186101567785919871" alt="">
+                        </div>
+                        <p>{{ store.step1.organizationName }}</p>
+                        <p>140 Caspian Court</p>
+                        <p>Sunnyvale, CA</p>
+                        <p>94089</p>
+                        <p>USA</p>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="box">
+                            <p class="title is-5">Organization details</p>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="box">
+                            <p class="title is-5">Organization details</p>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="box">
+                            <p class="title is-5">Organization details</p>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="box">
+                            <p class="title is-5">Organization details</p>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="box">
+                            <p class="title is-5">Organization details</p>
+                    </div>
+                </div>
+
+                <div class="column is-12">
+                    <div class="box">
+                            <p class="title is-5">Additional Instructions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a v-on:click="goToNext" class="button is-info is-rounded">Submit Application</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+    <script type="text/x-template" id="thanks">
+        <mk-content>
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-size-4">Thank you. Your membership application <br> for [PROJECT NAME] has been submitted. </h1>
+                    <p>Your Primary Contact ([PRIMARY CONTACT NAME]) and Billing Contact <br> ([BILLING CONTACT NAME] will receive a DocuSign application via email <br> when it is ready for review and signature.</p>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+            <div class="columns">
+                <div class="column has-text-centered ">
+                    <a class="button is-info is-rounded">Return to Project Website</a>
+                </div>
+            </div>
+            <div class="mk-separator"></div>
+        </mk-content>
+    </script>
+
+    <!-- Reusable Components -->
+    <script type="text/x-template" id="mk-content">
+        <section class="section">
+            <div class="columns has-text-centered">
+                <div class="column column is-8 is-offset-2 has-background-white">
+                    <slot></slot>
+                </div>
+            </div>
+        </section>
+    </script>
+
+    <script type="text/x-template" id="mk-step">
+        <li class="steps-segment" v-bind:class="{'is-active': active}" v-on:click="goToStep()" style="cursor:pointer;" >
+            <div class="steps-content" style="min-height:58px">
+                <p class="is-size-7 has-text-weight-bold">{{ title }}</p>
+                <p class="is-size-7">{{ subtitle }}</p>
+            </div>
+            <span class="steps-marker">
+                <span class="icon">
+                    <i class="fas fa-circle"></i>
+                </span>
+            </span>
+        </li>
+    </script>
+</head>
+
+<body class="has-background-light">
+    <div id="app">
+        <div v-show="isUserLoggedIn" class="section mk-paddingless-vertical" style="margin-bottom: 1rem;">
+            <div class="columns">
+                <div class="mk-content column is-8 is-offset-2">
+                    <ul class="steps has-content-centered">
+                        <mk-step v-for="item in steps"
+                        v-bind:key="item.title"
+                        v-bind:path="item.path"
+                            v-bind:title="item.title"
+                            v-bind:subtitle="item.subtitle"
+                            v-bind:active="currentStep === item.path"
+                            v-on:stepchange="changeStep">
+                        </mk-step>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <keep-alive>
+            <router-view v-on:stepchange="changeStep"></router-view>
+        </keep-alive>
+    </div>
+
+    <script>
+
+        var store = {
+            step1: null
+        }
+
+        var Login = {
+            template: '#login',
+            methods: {
+                login: function () {
+                    window.auth0.authorize({
+                        responseType: 'token id_token',
+                        redirectUri: 'http://127.0.0.1:8080/#/step-1'
+                    });
+                }
+            }
+        };
+        var Step1 = {
+            template: '#step-1',
+            data: function () {
+                return {
+                    organizationName: '',
+                    address: '',
+                    city: '',
+                }
+            },
+            methods: {
+                goToNext: function () {
+                    store.step1 = this._data;
+                    this.$emit('stepchange', '/step-2')
+                }
+            }
+        };
+        var Step2 = {
+            template: '#step-2',
+            data: function () {
+                return {
+                    selectedTier: ''
+                }
+            },
+            methods: {
+                goToNext: function () {
+                    this.$emit('stepchange', '/step-3')
+                }
+            }
+        }
+        var Step3 = {
+            template: '#step-3',
+            data: function () {
+                return {}
+            },
+            methods: {
+                goToNext: function () {
+                    this.$emit('stepchange', '/step-4')
+                }
+            }
+        }
+        var Step4 = {
+            template: '#step-4',
+            data: function () {
+                return {
+                    contacts: [{},{}]
+                }
+            },
+            methods: {
+                addContact: function () {
+                    console.log('## adding');
+                    this.contacts.push({})
+                },
+                removeContact: function(index) {
+                    this.contacts.splice(index, 1);
+                },
+                goToNext: function () {
+                    this.$emit('stepchange', '/step-5')
+
+                }
+            }
+        }
+        var Step5 = {
+            template: '#step-5',
+            data: function () {
+                return {}
+            },
+            methods: {
+                goToNext: function () {
+                    this.$emit('stepchange', '/step-6')
+
+                }
+            }
+        }
+        var Step6 = {
+            template: '#step-6',
+            data: function () {
+                return {}
+            },
+            methods: {
+                goToNext: function () {
+                    this.$emit('stepchange', '/step-7')
+
+                }
+            }
+        }
+        var Step7 = {
+            template: '#step-7',
+            data: function () {
+                return {
+                    store: store
+                }
+            },
+            methods: {
+                goToNext: function () {
+                    this.$emit('stepchange', '/thanks')
+                }
+            }
+        }
+        var Thanks = {
+            template: '#thanks'
+        }
+
+        var router = new VueRouter({
+            routes: [
+                { path: '/', component: Login },
+                { path: '/step-1', component: Step1 },
+                { path: '/step-2', component: Step2 },
+                { path: '/step-3', component: Step3 },
+                { path: '/step-4', component: Step4 },
+                { path: '/step-5', component: Step5 },
+                { path: '/step-6', component: Step6 },
+                { path: '/step-7', component: Step7 },
+                { path: '/thanks', component: Thanks }
+            ]
+        });
+
+        // Reusable Components Definition
+        Vue.component('mk-content', { template: '#mk-content' })
+        Vue.component('mk-step', {
+            template: '#mk-step',
+            props: {
+                path: String,
+                title: String,
+                subtitle: String,
+                active: Boolean
+            },
+            methods: {
+                goToStep: function () {
+                    this.$emit('stepchange', this.path)
+                }
+            }
+        })
+
+        // Initialize Auth0
+        window.auth0 = new auth0.WebAuth({
+            domain: 'lguerra.auth0.com',
+            clientID: 'X35OeQN9ue1n6Y1ujIk51IFowjA7HtsV'
+        });
+
+        function HandleAuthentication(appInstance) {
+            var hash = window.location.hash.replace('#/', '');
+
+            if (hash.indexOf('step-') >= 0) {
+                appInstance.changeStep('/' + hash, true)
+                return;
+            }
+
+            var queryParams = hash.split('&')
+                .reduce((acc, item) => {
+                    acc[item.split('=')[0]] = item.split('=')[1];
+                    return acc;
+                }, {})
+
+            if (!queryParams || !queryParams['id_token']) {
+                return;
+            }
+
+            auth0.parseHash({ hash }, function (err, authResult) {
+                if (err) {
+                    return;
+                }
+                appInstance.isUserLoggedIn = true;
+                appInstance.changeStep('/step-1')
+            });
+        }
+
+        function OnCreateApp() {
+            var appInstance = this;
+            HandleAuthentication(appInstance)
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isUserLoggedIn: true, // @todo: handle by localstorage
+                currentStep: '/login',
+                steps: [
+                    { path: '/step-1', title: 'Step 1', subtitle: 'LF Member' },
+                    { path: '/step-2', title: 'Step 2', subtitle: 'Membership Tier' },
+                    { path: '/step-3', title: 'Step 3', subtitle: 'Primary & Billing Contacts' },
+                    { path: '/step-4', title: 'Step 4', subtitle: 'Technical Contacts' },
+                    { path: '/step-5', title: 'Step 5', subtitle: 'Marketing & PR Contacts' },
+                    { path: '/step-6', title: 'Step 6', subtitle: 'Legal Contact + Instructions' },
+                    { path: '/step-7', title: 'Step 7', subtitle: 'Review & Submit' },
+                ]
+            },
+            methods: {
+                changeStep: function (path, noUpdateRouter) {
+                    this.currentStep = path;
+                    if (!noUpdateRouter) {
+                        router.push(path)
+                    }
+                }
+            },
+            router,
+            created: OnCreateApp
+        });
+
+    </script>
+</body>
+
+</html>
