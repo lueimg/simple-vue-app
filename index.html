@@ -8,8 +8,9 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdn.auth0.com/js/auth0/9.11.3/auth0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <style>
         /* debug rule */
@@ -316,7 +317,8 @@
 
                     <div class="mk-row columns">
                         <div class="column has-text-centered ">
-                            <a v-on:click="goToNext" class="button is-info is-rounded">Next: Membership Tier</a>
+                            <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Membership Tier</a>
+                            <a v-else v-on:click="goToReview" class="button is-info is-rounded">Save</a>
                         </div>
                     </div>
                     <div class="mk-separator"></div>
@@ -872,19 +874,17 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-4">
-                    <div class="box has-text-left">
-                        <h1 class="title is-7">Organization details</h1>
-                        <div class="logo">
-                            <img src="https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C22dbfa8e4c58450380333c50d0bcf81c/projects/M561396ba36f63d8ff26b0f7500f2bd381567781594691/images/M66fc125adfa2133ed88f79daa9b186101567785919871" alt="">
-                        </div>
-                        <p>{{ store.step1.organizationName }}</p>
-                        <p>140 Caspian Court</p>
-                        <p>Sunnyvale, CA</p>
-                        <p>94089</p>
-                        <p>USA</p>
+                <mk-box title="Organization Details" v-on:editStep="goToPage('/step-1')">
+                    <div class="logo">
+                        <img src="https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C22dbfa8e4c58450380333c50d0bcf81c/projects/M561396ba36f63d8ff26b0f7500f2bd381567781594691/images/M66fc125adfa2133ed88f79daa9b186101567785919871" alt="">
                     </div>
-                </div>
+                    <p>{{ store.step1 ? store.step1.organizationName: '' }}</p>
+                    <p>140 Caspian Court</p>
+                    <p>Sunnyvale, CA</p>
+                    <p>94089</p>
+                    <p>USA</p>
+                </mk-box>
+
                 <div class="column is-4">
                     <div class="box">
                             <p class="title is-5">Organization details</p>
@@ -920,7 +920,7 @@
             <div class="mk-separator"></div>
             <div class="columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Submit Application</a>
+                    <a v-on:click="submit" class="button is-info is-rounded">Submit Application</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -945,6 +945,32 @@
     </script>
 
     <!-- Reusable Components -->
+    <script type="text/x-template" id="mk-box">
+        <div class="mk-box column is-4">
+            <div class="box has-text-left">
+                <h1 class="title is-7">{{ title }}</h1>
+                <slot></slot>
+                <div class="box-icon-edit"
+                    v-on:click="$emit('editStep')">
+                    <span class="icon">
+                        <i class="far fa-edit"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <style>
+        .mk-box {
+            position: relative;
+        }
+        .box-icon-edit {
+            cursor: pointer;
+            position: absolute;
+            right: .75rem;
+            bottom: .75rem;
+        }
+    </style>
+
     <script type="text/x-template" id="mk-content">
         <section class="section">
             <div class="columns has-text-centered">
@@ -989,7 +1015,7 @@
             </div>
         </div>
         <keep-alive>
-            <router-view v-on:stepchange="changeStep"></router-view>
+            <router-view v-bind:review="isReviewMode"  @review-step="reviewStep" v-on:stepchange="changeStep"></router-view>
         </keep-alive>
     </div>
 
@@ -1012,6 +1038,9 @@
         };
         var Step1 = {
             template: '#step-1',
+            props: {
+                review: Boolean
+            },
             data: function () {
                 return {
                     organizationName: '',
@@ -1020,6 +1049,9 @@
                 }
             },
             methods: {
+                goToReview: function () {
+                    this.$emit('stepchange', '/step-7')
+                },
                 goToNext: function () {
                     store.step1 = this._data;
                     this.$emit('stepchange', '/step-2')
@@ -1059,7 +1091,6 @@
             },
             methods: {
                 addContact: function () {
-                    console.log('## adding');
                     this.contacts.push({})
                 },
                 removeContact: function(index) {
@@ -1103,8 +1134,26 @@
                 }
             },
             methods: {
-                goToNext: function () {
-                    this.$emit('stepchange', '/thanks')
+                goToPage: function (pagePath) {
+                    this.$emit('review-step', pagePath)
+                },
+                submit: function () {
+                    var self = this;
+                    var payload = {}; // get from store
+                    var route = '/external-page'
+                    var headers = {};
+                    axios({
+                        method: 'post',
+                        url: route,
+                        data: payload,
+                        headers: headers
+                    }).then(function() {
+                        self.$emit('stepchange', '/thanks');
+                    }).catch(function (error) {
+                        console.log(error);
+                    }).finally(function () {
+                        // always executed
+                    });
                 }
             }
         }
@@ -1127,7 +1176,13 @@
         });
 
         // Reusable Components Definition
-        Vue.component('mk-content', { template: '#mk-content' })
+        Vue.component('mk-content', { template: '#mk-content' });
+
+        Vue.component('mk-box', {
+            template: '#mk-box',
+            props: ['title']
+        });
+
         Vue.component('mk-step', {
             template: '#mk-step',
             props: {
@@ -1141,7 +1196,7 @@
                     this.$emit('stepchange', this.path)
                 }
             }
-        })
+        });
 
         // Initialize Auth0
         window.auth0 = new auth0.WebAuth({
@@ -1185,6 +1240,7 @@
             el: '#app',
             data: {
                 isUserLoggedIn: true, // @todo: handle by localstorage
+                isReviewMode: false,
                 currentStep: '/login',
                 steps: [
                     { path: '/step-1', title: 'Step 1', subtitle: 'LF Member' },
@@ -1197,11 +1253,21 @@
                 ]
             },
             methods: {
+                reviewStep: function(path) {
+                    this.isReviewMode = true;
+                    this.currentStep = path;
+                    router.push(path)
+                },
                 changeStep: function (path, noUpdateRouter) {
                     this.currentStep = path;
-                    if (!noUpdateRouter) {
-                        router.push(path)
+
+                    if (noUpdateRouter){
+                        // @info: we don't need to update path due
+                        // we are in the same path
+                        return;
                     }
+
+                    router.push(path)
                 }
             },
             router,
