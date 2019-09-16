@@ -21,8 +21,8 @@
             box-shadow: none !important;
         }
 
-        .box {
-            margin-top: 5rem;
+        body {
+            min-height: 100vh;
         }
 
         .avatar {
@@ -43,10 +43,6 @@
             padding-bottom: 0;
         }
 
-        body {
-            min-height: 100vh;
-        }
-
         .mk-separator {
             margin-top: 1rem;
         }
@@ -58,97 +54,245 @@
         .mk-table * {
             text-align: center !important;
         }
+    </style>
 
-        .steps:not(.is-vertical).has-content-centered .steps-content {
-            margin-top: 2rem;
-            margin-left: .5em;
-            margin-right: .5em;
-            padding-top: .2em;
-        }
-
-
-        .steps:not(.is-vertical).has-content-centered .steps-marker {
-            position: absolute;
-            left: calc(50% - 1rem);
-        }
-
-        .steps .steps-marker {
-            height: 2rem;
-            width: 2rem;
-        }
-
-        .steps .steps-marker {
-            align-items: center;
-            display: flex;
-            border-radius: 50%;
-            font-weight: 700;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .steps:not(.is-vertical) .steps-segment:not(:last-child) {
-            flex-basis: 1rem;
-            flex-grow: 1;
-            flex-shrink: 1;
-        }
-
-        .steps .steps-segment {
-            position: relative;
-        }
+    <style>
+            .steps:not(.is-vertical).has-content-centered .steps-content {
+                margin-top: 2rem;
+                margin-left: .5em;
+                margin-right: .5em;
+                padding-top: .2em;
+            }
 
 
-        .steps:not(.is-vertical).has-content-centered .steps-segment:not(:last-child):after {
-            left: 50%;
-            right: -50%;
-        }
+            .steps:not(.is-vertical).has-content-centered .steps-marker {
+                position: absolute;
+                left: calc(50% - 1rem);
+            }
 
-        .steps:not(.is-vertical) .steps-segment:not(:last-child):after {
-            height: .2em;
-            left: 1.76rem;
-            right: -.24rem;
-            bottom: -1rem;
-        }
+            .steps .steps-marker {
+                height: 2rem;
+                width: 2rem;
+            }
 
-        .steps .steps-segment:not(:last-child):after {
-            content: " ";
-            display: block;
-            position: absolute;
-        }
+            .steps .steps-marker {
+                align-items: center;
+                display: flex;
+                border-radius: 50%;
+                font-weight: 700;
+                justify-content: center;
+                position: relative;
+                z-index: 10;
+            }
 
-        .steps-segment:after {
-            background-color: #00d1b2;
-        }
+            .steps:not(.is-vertical) .steps-segment:not(:last-child) {
+                flex-basis: 1rem;
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
 
-        .steps:not(.is-vertical).has-content-centered {
-            text-align: center;
-        }
+            .steps .steps-segment {
+                position: relative;
+            }
 
-        .steps:not(.is-vertical) {
-            display: flex;
-        }
 
-        .steps {
-            font-size: 1rem;
-        }
+            .steps:not(.is-vertical).has-content-centered .steps-segment:not(:last-child):after {
+                left: 50%;
+                right: -50%;
+            }
 
-        .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
-            background-color: #00d1b2;
-            color: #fff;
-        }
+            .steps:not(.is-vertical) .steps-segment:not(:last-child):after {
+                height: .2em;
+                left: 1.76rem;
+                right: -.24rem;
+                bottom: -1rem;
+            }
 
-        .steps:not(.is-hollow) .steps-segment.is-active~.steps-segment .steps-marker:not(.is-hollow) {
-            background-color: #dbdbdb;
-            color: #000000b3;
-        }
+            .steps .steps-segment:not(:last-child):after {
+                content: " ";
+                display: block;
+                position: absolute;
+            }
 
-        .steps-segment.is-active~.steps-segment:after {
-            background-color: #dbdbdb;
-        }
+            .steps-segment:after {
+                background-color: #00d1b2;
+            }
 
-        .steps-segment.is-active:after {
-            background-color: #dbdbdb;
-        }
+            .steps:not(.is-vertical).has-content-centered {
+                text-align: center;
+            }
+
+            .steps:not(.is-vertical) {
+                display: flex;
+            }
+
+            .steps {
+                font-size: 1rem;
+            }
+
+            .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
+                background-color: #00d1b2;
+                color: #fff;
+            }
+
+            .steps:not(.is-hollow) .steps-segment.is-active~.steps-segment .steps-marker:not(.is-hollow) {
+                background-color: #dbdbdb;
+                color: #000000b3;
+            }
+
+            .steps-segment.is-active~.steps-segment:after {
+                background-color: #dbdbdb;
+            }
+
+            .steps-segment.is-active:after {
+                background-color: #dbdbdb;
+            }
+    </style>
+
+    <style>
+            .switch[type="checkbox"] {
+                outline: 0;
+                user-select: none;
+                display: inline-block;
+                position: absolute;
+                opacity: 0;
+            }
+
+            .switch[type="checkbox"].is-small.is-rtl + label {
+                padding-left: 0;
+                padding-right: 2.75rem;
+            }
+            .switch[type="checkbox"].is-small + label {
+                position: relative;
+                display: initial;
+                font-size: .75rem;
+                line-height: initial;
+                padding-left: 2.75rem;
+                padding-top: .2rem;
+                cursor: pointer;
+            }
+            .switch[type="checkbox"].is-rtl + label {
+                padding-left: 0;
+                padding-right: 3.5rem;
+            }
+            .switch[type="checkbox"] + label {
+                position: relative;
+                display: initial;
+                font-size: 1rem;
+                line-height: initial;
+                padding-left: 3.5rem;
+                padding-top: .2rem;
+                cursor: pointer;
+            }
+
+            .switch[type="checkbox"].is-small.is-rounded + label::before {
+                border-radius: 24px;
+            }
+            .switch[type="checkbox"].is-small:checked + label::before {
+                background:#00d1b2;
+            }
+            .switch[type="checkbox"].is-small.is-rtl + label::before {
+                left: auto;
+                right: 0;
+            }
+            .switch[type="checkbox"].is-small + label::before {
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                width: 2.25rem;
+                height: 1.125rem;
+                border: .1rem solid
+                transparent;
+                border-radius: 4px;
+                background: #b5b5b5;
+                content: "";
+            }
+            .switch[type="checkbox"].is-rounded + label::before {
+                border-radius: 24px;
+            }
+            .switch[type="checkbox"]:checked + label::before {
+                background:#00d1b2;
+            }
+            .switch[type="checkbox"].is-rtl + label::before {
+                left: auto;
+                right: 0;
+            }
+            .switch[type="checkbox"] + label::before {
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                width: 3rem;
+                height: 1.5rem;
+                border: .1rem solid transparent;
+                border-radius: 4px;
+                background: #b5b5b5;
+                content: "";
+            }
+
+            .switch[type="checkbox"].is-small:checked.is-rtl + label::after {
+                left: auto;
+                right: 1.25rem;
+            }
+            .switch[type="checkbox"].is-small.is-rounded + label::after {
+                border-radius: 50%;
+            }
+            .switch[type="checkbox"].is-small:checked + label::after {
+                left: 1.25rem;
+            }
+            .switch[type="checkbox"].is-small.is-rtl + label::after {
+                left: auto;
+                right: .25rem;
+            }
+            .switch[type="checkbox"]:checked.is-rtl + label::after {
+
+                left: auto;
+                right: 1.625rem;
+            }
+            .switch[type="checkbox"].is-small + label::after {
+                display: block;
+                position: absolute;
+                top: .25rem;
+                left: .25rem;
+                width: .625rem;
+                height: .625rem;
+                transform: translate3d(0, 0, 0);
+                border-radius: 4px;
+                background:
+                #fff;
+                transition: all .25s ease-out;
+                content: "";
+            }
+            .switch[type="checkbox"].is-rounded + label::after {
+
+                border-radius: 50%;
+
+            }
+            .switch[type="checkbox"]:checked + label::after {
+
+                left: 1.625rem;
+
+            }
+            .switch[type="checkbox"].is-rtl + label::after {
+
+                left: auto;
+                right: .25rem;
+
+            }
+            .switch[type="checkbox"] + label::after {
+                display: block;
+                position: absolute;
+                top: .25rem;
+                left: .25rem;
+                width: 1rem;
+                height: 1rem;
+                transform: translate3d(0, 0, 0);
+                border-radius: 4px;
+                background: #fff;
+                transition: all .25s ease-out;
+                content: "";
+            }
     </style>
 
     <script type="text/x-template" id="login">
@@ -158,7 +302,7 @@
                     <div class="column is-4 is-offset-4">
                         <h3 class="title has-text-grey">Login</h3>
                         <p class="subtitle has-text-grey">Please login to proceed.</p>
-                        <div class="box">
+                        <div class="box" style="margin-top: 5rem;">
                             <figure class="avatar">
                                 <img src="https://gallery.mailchimp.com/3928cce279308bf13be2fa84d/images/35452a77-9fd5-4594-b6b3-740a8351baa8.jpg">
                             </figure>
@@ -180,7 +324,8 @@
                     <div class="columns">
                         <div class="column">
                             <h1 class="title is-size-4"> Already a Linux Foundation Member? </h1>
-                            <p>If your organization is already a Linux Foundation member, search for it in <br> the field below and we will auto-populate the details that we have on file.</p>
+                            <p>If your organization is already a Linux Foundation member, search for it in
+                                <br> the field below and we will auto-populate the details that we have on file.</p>
                         </div>
                     </div>
                     <div class="columns">
@@ -198,7 +343,8 @@
                     <div class="columns">
                         <div class="column">
                             <h1 class="title is-4">Organization Details</h1>
-                            <p>If your organization is not already a Linux Foundation member, please <br> enter the details in the fields below.</p>
+                            <p>If your organization is not already a Linux Foundation member, please
+                                <br> enter the details in the fields below.</p>
                         </div>
                     </div>
                     <div class="columns">
@@ -313,7 +459,7 @@
                     <div class="mk-row columns">
                         <div class="column has-text-centered ">
                             <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Membership Tier</a>
-                            <a v-else v-on:click="goToReview" class="button is-info is-rounded">Save</a>
+                            <a v-else v-on:click="goToReview" class="button is-info is-rounded">Save & Review</a>
                         </div>
                     </div>
                     <div class="mk-separator"></div>
@@ -436,7 +582,7 @@
             <div class="mk-row columns">
                 <div class="column has-text-centered ">
                     <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Primary + Billing Contacts</a>
-                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save & Review</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -452,56 +598,61 @@
                 </div>
             </div>
             <div class="columns">
-
                 <div class="column">
                     <div class="columns">
                         <div class="column is-10 is-offset-1">
                             <h1 class="title is-size-6">Primary Contact</h1>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="priFirstName" type="text" class="input" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
+                                    <input v-model="priLastName" type="text" class="input" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                    <input v-model="priJobTitle" type="text" class="input" placeholder="Job Title">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input v-model="priEmail" type="text" class="input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                    <input v-model="priPhone" type="text" class="input" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                    <input v-model="priTwitter" type="text" class="input" placeholder="Twitter">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                    <input v-model="priGithub" type="text" class="input" placeholder="Github">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                    <input v-model="priLinkedin" type="text" class="input" placeholder="LinkedIn">
                                 </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Update Linux Foundation primary contact information.
+                                <div class="field">
+                                    <input id="priUpdate" v-model="priUpdate" type="checkbox" name="priUpdate" class="switch is-rtl is-small is-rounded">
+                                    <label for="priUpdate"> Update Linux Foundation primary contact information.</label>
+                                </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
+                                <div class="field">
+                                    <input id="priSubscribe" v-model="priSubscribe" type="checkbox" name="priSubscribe" class="switch is-rtl is-small is-rounded is-success">
+                                    <label for="priSubscribe">Subscribe to all relevant mailing lists and meetings.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -509,53 +660,59 @@
                 <div class="column">
                     <div class="columns">
                         <div class="column is-10 is-offset-1">
-                            <h1 class="title is-size-6">Primary Contact</h1>
-                            <div class="field">
+                            <h1 class="title is-size-6">Billing Contact</h1>
+                                <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="bilFirstName" type="text" class="input" placeholder="First Name">
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilLastName" type="text" class="input" placeholder="Last Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilJobTitle" type="text" class="input" placeholder="Job Title">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilEmail" type="text" class="input" placeholder="Email">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilPhone" type="text" class="input" placeholder="Phone">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilTwitter" type="text" class="input" placeholder="Twitter">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilGithub" type="text" class="input" placeholder="Github">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="is-size-7 has-text-left">
-                                    Update Linux Foundation primary contact information.
-                            </div>
-                            <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
-                            </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input v-model="bilLinkedin" type="text" class="input" placeholder="LinkedIn">
+                                    </div>
+                                </div>
+                                <div class="is-size-7 has-text-left">
+                                    <div class="field">
+                                        <input id="bilUpdate" v-model="bilUpdate" type="checkbox" name="bilUpdate" class="switch is-rtl is-small is-rounded">
+                                        <label for="bilUpdate"> Update Linux Foundation primary contact information.</label>
+                                    </div>
+                                </div>
+                                <div class="is-size-7 has-text-left">
+                                    <div class="field">
+                                        <input id="bilSubscribe" v-model="bilSubscribe" type="checkbox" name="bilSubscribe" class="switch is-rtl is-small is-rounded is-success">
+                                        <label for="bilSubscribe">Subscribe to all relevant mailing lists and meetings.</label>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -564,7 +721,9 @@
             <div class="mk-separator"></div>
             <div class="columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Technical Contacts</a>
+                    <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Technical Contacts</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save & Review</a>
+
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -586,46 +745,49 @@
                             <h1 class="title is-size-6">Technical Contact #{{ index + 1 }}</h1>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="item.firstName" type="text" class="input" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
+                                    <input v-model="item.lastName" type="text" class="input" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                    <input v-model="item.jobTitle" type="text" class="input" placeholder="Job Title">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input v-model="item.email" type="text" class="input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                    <input v-model="item.phone" type="text" class="input" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                    <input v-model="item.twitter" type="text" class="input" placeholder="Twitter">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                    <input v-model="item.github" type="text" class="input" placeholder="Github">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                    <input v-model="item.linkedin" type="text" class="input" placeholder="LinkedIn">
                                 </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
+                                <div class="field">
+                                    <input :id="'contact-subscribe-'+index" v-model="item.subscribe" type="checkbox" :name="'contact-subscribe-'+index" class="switch is-rtl is-small is-rounded is-success">
+                                    <label :for="'contact-subscribe-'+index">Subscribe to all relevant mailing lists and meetings.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -640,7 +802,8 @@
             </div>
             <div class="columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Makerting + PR Contacts</a>
+                    <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Makerting + PR Contacts</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save & Review</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -652,7 +815,8 @@
             <div class="columns">
                 <div class="column">
                     <h1 class="title is-size-4">Marketing & PR Contacts</h1>
-                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated. <br> If you wish to have a different primary contact for this membership application please update it below.</p>
+                    <p>If you are already a Linux Foundation member, the primary and billing contact details will be auto-populated.
+                        <br> If you wish to have a different primary contact for this membership application please update it below.</p>
                 </div>
             </div>
             <div class="columns">
@@ -663,49 +827,55 @@
                             <h1 class="title is-size-6">Marketing Contact</h1>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="marFirstName" type="text" class="input" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
+                                    <input v-model="marLastName" type="text" class="input" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                    <input v-model="marJobTitle" type="text" class="input" placeholder="Job Title">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input v-model="marEmail" type="text" class="input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                    <input v-model="marPhone" type="text" class="input" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                    <input v-model="marTwitter" type="text" class="input" placeholder="Twitter">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                    <input v-model="marGithub" type="text" class="input" placeholder="Github">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                    <input v-model="marLinkedin" type="text" class="input" placeholder="LinkedIn">
                                 </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Update Linux Foundation primary contact information.
+                                <div class="field">
+                                    <input id="marUpdate" v-model="marUpdate" type="checkbox" name="marUpdate" class="switch is-rtl is-small is-rounded">
+                                    <label for="marUpdate"> Update Linux Foundation primary contact information.</label>
+                                </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
+                                <div class="field">
+                                    <input id="marSubscribe" v-model="marSubscribe" type="checkbox" name="marSubscribe" class="switch is-rtl is-small is-rounded is-success">
+                                    <label for="marSubscribe">Subscribe to all relevant mailing lists and meetings.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -716,49 +886,55 @@
                             <h1 class="title is-size-6">PR Contact</h1>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="prFirstName" type="text" class="input" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
+                                    <input v-model="prLastName" type="text" class="input" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                    <input v-model="prJobTitle" type="text" class="input" placeholder="Job Title">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input v-model="prEmail" type="text" class="input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                    <input v-model="prPhone" type="text" class="input" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                    <input v-model="prTwitter" type="text" class="input" placeholder="Twitter">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                    <input v-model="prGithub" type="text" class="input" placeholder="Github">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                    <input v-model="prLinkedin" type="text" class="input" placeholder="LinkedIn">
                                 </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Update Linux Foundation primary contact information.
+                                <div class="field">
+                                    <input id="prUpdate" v-model="prUpdate" type="checkbox" name="prUpdate" class="switch is-rtl is-small is-rounded">
+                                    <label for="prUpdate"> Update Linux Foundation primary contact information.</label>
+                                </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
+                                <div class="field">
+                                    <input id="prSubscribe" v-model="prSubscribe" type="checkbox" name="prSubscribe" class="switch is-rtl is-small is-rounded is-success">
+                                    <label for="prSubscribe">Subscribe to all relevant mailing lists and meetings.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -768,7 +944,8 @@
             <div class="mk-separator"></div>
             <div class="columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Legal Contact + Instructions</a>
+                    <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Legal Contact + Instructions</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save & Review</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -790,49 +967,55 @@
                             <h1 class="title is-size-6">Legal Contact</h1>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="First Name">
+                                    <input v-model="legFirstName" type="text" class="input" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Last Name">
+                                    <input v-model="legLastName" type="text" class="input" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Job Title">
+                                    <input v-model="legJobTitle" type="text" class="input" placeholder="Job Title">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input v-model="legEmail" type="text" class="input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Phone">
+                                    <input v-model="legPhone" type="text" class="input" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Twitter">
+                                    <input v-model="legTwitter" type="text" class="input" placeholder="Twitter">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="Github">
+                                    <input v-model="legGithub" type="text" class="input" placeholder="Github">
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" class="input" placeholder="LinkedIn">
+                                    <input v-model="legLinkedin" type="text" class="input" placeholder="LinkedIn">
                                 </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Update Linux Foundation primary contact information.
+                                <div class="field">
+                                    <input id="legUpdate" v-model="legUpdate" type="checkbox" name="legUpdate" class="switch is-rtl is-small is-rounded">
+                                    <label for="legUpdate"> Update Linux Foundation primary contact information.</label>
+                                </div>
                             </div>
                             <div class="is-size-7 has-text-left">
-                                    Subscribe to all relevant mailing lists and meetings.
+                                <div class="field">
+                                    <input id="legSubscribe" v-model="legSubscribe" type="checkbox" name="legSubscribe" class="switch is-rtl is-small is-rounded is-success">
+                                    <label for="legSubscribe">Subscribe to all relevant mailing lists and meetings.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -841,11 +1024,9 @@
                     <div class="columns">
                         <div class="column is-10 is-offset-1">
                             <h1 class="title is-size-6">Have Questions? </h1>
-                            <p>
-                                    Please provide any additional details or instructions needed with respect to your membership application.
-                            </p>
+                            <p> Please provide any additional details or instructions needed with respect to your membership application.</p>
                             <br>
-                            <textarea class="textarea" placeholder="Additional Instructions" rows="10"></textarea>
+                            <textarea v-model="additionalInstructions" class="textarea" placeholder="Additional Instructions" rows="10"></textarea>
                         </div>
                     </div>
                 </div>
@@ -854,7 +1035,8 @@
             <div class="mk-separator"></div>
             <div class="columns">
                 <div class="column has-text-centered ">
-                    <a v-on:click="goToNext" class="button is-info is-rounded">Next: Final Review + Submit</a>
+                    <a v-if="!review" v-on:click="goToNext" class="button is-info is-rounded">Next: Final Review + Submit</a>
+                    <a v-else v-on:click="$emit('stepchange', '/step-7')" class="button is-info is-rounded">Save & Review</a>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -871,6 +1053,9 @@
             </div>
             <div class="columns is-multiline">
                 <mk-box title="Organization Details" v-on:editStep="goToPage('/step-1')">
+                    <div class="field">
+                        <img id="review-logo" src="" alt="preview" class="image is-32x32" />
+                    </div>
                     <p>{{ store.step1 ? store.step1.organizationName: '' }}</p>
                     <p>{{ store.step1 ? store.step1.address: '' }}</p>
                     <p>{{ store.step1 ? store.step1.city: '' }}</p>
@@ -885,11 +1070,89 @@
                     <p><b>Annual Fee:</b> {{ store.step2 ? store.step2.tierValue: '' }}</p>
                 </mk-box>
 
+                <mk-box title="Primary contact" v-on:editStep="goToPage('/step-3')" >
+                    <p>{{ store.step3 ? store.step3.priFirstName: '' }} {{ store.step3 ? store.step3.priLastName: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priJobTitle: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priEmail: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priPhone: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priTwitter: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priGithub: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.priLinkedin: '' }}</p>
+                    <p>Subscribed: {{ store.step3 && store.step3.priSubscribe ? 'Yes': 'No' }}</p>
+                </mk-box>
+                <mk-box title="Billing contact" v-on:editStep="goToPage('/step-3')" >
+                    <p>{{ store.step3 ? store.step3.bilFirstName: '' }} {{ store.step3 ? store.step3.bilLastName: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilJobTitle: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilEmail: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilPhone: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilTwitter: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilGithub: '' }}</p>
+                    <p>{{ store.step3 ? store.step3.bilLinkedin: '' }}</p>
+                    <p>Subscribed: {{ store.step3 && store.step3.bilSubscribe ? 'Yes': 'No' }}</p>
+                </mk-box>
+
+                <template v-if="store.step4 && store.step4.contacts && store.step4.contacts.length">
+                    <template v-for="(item, index) in store.step4.contacts">
+                        <mk-box :title="'Technical Contact #'+(index + 1)" v-on:editStep="goToPage('/step-4')">
+                            <p>{{ item.firstName || '' }} {{ item.lastName || '' }}</p>
+                            <p>{{ item.jobTitle || '' }}</p>
+                            <p>{{ item.email || '' }}</p>
+                            <p>{{ item.phone || '' }}</p>
+                            <p>{{ item.twitter || '' }}</p>
+                            <p>{{ item.github || '' }}</p>
+                            <p>{{ item.linkedin || '' }}</p>
+                            <p>Subscribed: {{ item.subscribe ? 'Yes': 'No' }}</p>
+                        </mk-box>
+                    </template>
+                </template>
+
+                <mk-box title="Marketing contact" v-on:editStep="goToPage('/step-5')" >
+                    <p>{{ store.step5 ? store.step5.marFirstName: '' }} {{ store.step5 ? store.step5.marLastName: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marJobTitle: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marEmail: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marPhone: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marTwitter: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marGithub: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.marLinkedin: '' }}</p>
+                    <p>Subscribed: {{ store.step5 && store.step5.marSubscribe ? 'Yes': 'No' }}</p>
+                </mk-box>
+                <mk-box title="PR contact" v-on:editStep="goToPage('/step-5')" >
+                    <p>{{ store.step5 ? store.step5.prFirstName: '' }} {{ store.step5 ? store.step5.prLastName: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prJobTitle: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prEmail: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prPhone: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prTwitter: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prGithub: '' }}</p>
+                    <p>{{ store.step5 ? store.step5.prLinkedin: '' }}</p>
+                    <p>Subscribed: {{ store.step5 && store.step5.prSubscribe ? 'Yes': 'No' }}</p>
+                </mk-box>
+
+                <mk-box title="Legal contact" v-on:editStep="goToPage('/step-6')" >
+                    <p>{{ store.step6 ? store.step6.legFirstName: '' }} {{ store.step6 ? store.step6.legLastName: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legJobTitle: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legEmail: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legPhone: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legTwitter: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legGithub: '' }}</p>
+                    <p>{{ store.step6 ? store.step6.legLinkedin: '' }}</p>
+                    <p>Subscribed: {{ store.step6 && store.step6.legSubscribe ? 'Yes': 'No' }}</p>
+                </mk-box>
+
+                <mk-box title="Additional Instructions" size="is-12" v-on:editStep="goToPage('/step-6')" >
+                    {{ store.step6 && store.step6.additionalInstructions || '' }}
+                </mk-box>
             </div>
             <div class="mk-separator"></div>
             <div class="columns">
                 <div class="column has-text-centered ">
                     <a v-on:click="submit" class="button is-info is-rounded">Submit Application</a>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <p>
+                            By submitting your application you are agreeing to our <br> Privacy Policy and Terms of Use.
+                    </p>
                 </div>
             </div>
             <div class="mk-separator"></div>
@@ -915,7 +1178,7 @@
 
     <!-- Reusable Components -->
     <script type="text/x-template" id="mk-box">
-        <div class="mk-box column is-4">
+        <div class="mk-box column" v-bind:class="[currentSize]" >
             <div class="box has-text-left">
                 <h1 class="title is-7">{{ title }}</h1>
                 <slot></slot>
@@ -933,7 +1196,7 @@
             position: relative;
         }
         .mk-box .box {
-            min-height: 15rem;
+            min-height: 17rem;
         }
         .box-icon-edit {
             cursor: pointer;
@@ -975,19 +1238,21 @@
                 <div class="mk-content column is-8 is-offset-2">
                     <ul class="steps has-content-centered">
                         <mk-step v-for="item in steps"
-                        v-bind:key="item.title"
-                        v-bind:path="item.path"
-                            v-bind:title="item.title"
-                            v-bind:subtitle="item.subtitle"
-                            v-bind:active="currentStep === item.path"
-                            v-on:stepchange="changeStep">
+                                    v-bind:key="item.title"
+                                    v-bind:path="item.path"
+                                    v-bind:title="item.title"
+                                    v-bind:subtitle="item.subtitle"
+                                    v-bind:active="currentStep === item.path"
+                                    v-on:stepchange="changeStep">
                         </mk-step>
                     </ul>
                 </div>
             </div>
         </div>
         <keep-alive>
-            <router-view v-bind:review="isReviewMode"  @review-step="reviewStep" v-on:stepchange="changeStep"></router-view>
+            <router-view v-bind:review="isReviewMode"
+                        @review-step="reviewStep"
+                        v-on:stepchange="changeStep"></router-view>
         </keep-alive>
     </div>
 
@@ -1020,32 +1285,26 @@
             },
             data: function () {
                 return {
-                    organizationName: 'lg guerra',
-                    address: 'lg address',
-                    city: 'lg city',
-                    country: 'lg country',
-                    state: 'lg state',
-                    zip: 'lg zip',
+                    organizationName: '',
+                    address: '',
+                    city: '',
+                    country: '',
+                    state: '',
+                    zip: '',
                     employees: '',
+                    logoURL: '',
+                    logoFile: null,
                 }
             },
             methods: {
                 updateFile: function (event) {
-                    var img = document.getElementById("thumbnail");
-                    var reader = new FileReader();
-
                     if (!event || !event.target.files || !event.target.files.length) {
                         return;
                     }
 
-                    img.file = event.target.files[0];
-
-                    reader.onload = (function(aImg) {
-                        return function(e) {
-                            aImg.src = e.target.result;
-                        }
-                    })(img);
-                    reader.readAsDataURL(img.file)
+                    var file = event.target.files[0];
+                    this.logoFile = file;
+                    showLogoPreview("thumbnail", file)
                 },
                 goToReview: function () {
                     this.$emit('stepchange', '/step-7')
@@ -1056,6 +1315,19 @@
                 }
             }
         };
+
+        function showLogoPreview(imageClass, file) {
+            var reader = new FileReader();
+            var img = document.getElementById(imageClass);
+            img.file = file;
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                }
+            })(img);
+            reader.readAsDataURL(file)
+        }
+
         var Step2 = {
             template: '#step-2',
             props: {
@@ -1083,17 +1355,46 @@
         }
         var Step3 = {
             template: '#step-3',
+            props: {
+                review: Boolean
+            },
             data: function () {
-                return {}
+                return {
+                    priFirstName: '',
+                    priLastName: '',
+                    priJobTitle: '',
+                    priEmail: '',
+                    priPhone: '',
+                    priTwitter: '',
+                    priGithub: '',
+                    priLinkedin: '',
+                    priUpdate: '',
+                    priSubscribe: '',
+
+                    bilFirstName: '',
+                    bilLastName: '',
+                    bilJobTitle: '',
+                    bilEmail: '',
+                    bilPhone: '',
+                    bilTwitter: '',
+                    bilGithub: '',
+                    bilLinkedin: '',
+                    bilUpdate: '',
+                    bilSubscribe: '',
+                }
             },
             methods: {
                 goToNext: function () {
+                    store.step5 = this._data;
                     this.$emit('stepchange', '/step-4')
                 }
             }
         }
         var Step4 = {
             template: '#step-4',
+            props: {
+                review: Boolean
+            },
             data: function () {
                 return {
                     contacts: [{},{}]
@@ -1107,6 +1408,7 @@
                     this.contacts.splice(index, 1);
                 },
                 goToNext: function () {
+                    store.step4 = this._data;
                     this.$emit('stepchange', '/step-5')
 
                 }
@@ -1114,25 +1416,65 @@
         }
         var Step5 = {
             template: '#step-5',
+            props: {
+                review: Boolean
+            },
             data: function () {
-                return {}
+                return {
+                    marFirstName: '',
+                    marLastName: '',
+                    marJobTitle: '',
+                    marEmail: '',
+                    marPhone: '',
+                    marTwitter: '',
+                    marGithub: '',
+                    marLinkedin: '',
+                    marUpdate: '',
+                    marSubscribe: '',
+
+                    prFirstName: '',
+                    prLastName: '',
+                    prJobTitle: '',
+                    prEmail: '',
+                    prPhone: '',
+                    prTwitter: '',
+                    prGithub: '',
+                    prLinkedin: '',
+                    prUpdate: '',
+                    prSubscribe: '',
+                }
             },
             methods: {
                 goToNext: function () {
+                    store.step5 = this._data;
                     this.$emit('stepchange', '/step-6')
-
                 }
             }
         }
         var Step6 = {
             template: '#step-6',
+            props: {
+                review: Boolean
+            },
             data: function () {
-                return {}
+                return {
+                    legFirstName: '',
+                    legLastName: '',
+                    legJobTitle: '',
+                    legEmail: '',
+                    legPhone: '',
+                    legTwitter: '',
+                    legGithub: '',
+                    legLinkedin: '',
+                    legUpdate: '',
+                    legSubscribe: '',
+                    additionalInstructions: '',
+                }
             },
             methods: {
                 goToNext: function () {
+                    store.step6 = this._data;
                     this.$emit('stepchange', '/step-7')
-
                 }
             }
         }
@@ -1143,6 +1485,13 @@
                     store: store
                 }
             },
+            activated: function() {
+                if (!store.step1 || !store.step1.logoFile) {
+                    return;
+                }
+
+                showLogoPreview('review-logo', store.step1.logoFile)
+            },
             methods: {
                 goToPage: function (pagePath) {
                     this.$emit('review-step', pagePath)
@@ -1152,6 +1501,8 @@
                     var payload = {}; // get from store
                     var route = '/external-page'
                     var headers = {};
+                    // @info: If there is a logoFile we should POST this file first
+                    // then, we should save the new logoURL with all the other data
                     axios({
                         method: 'post',
                         url: route,
@@ -1163,6 +1514,7 @@
                         console.log(error);
                     }).finally(function () {
                         // always executed
+                        self.$emit('stepchange', '/thanks');
                     });
                 }
             }
@@ -1190,7 +1542,12 @@
 
         Vue.component('mk-box', {
             template: '#mk-box',
-            props: ['title']
+            props: ['title', 'size'],
+            data: function() {
+                return {
+                    currentSize: this.size || 'is-4'
+                }
+            }
         });
 
         Vue.component('mk-step', {
